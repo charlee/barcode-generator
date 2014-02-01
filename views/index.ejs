@@ -1,0 +1,84 @@
+<h1><%= title %></h1>
+
+<form role="form" class="form-horizontal" method="POST">
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">1,2 Name</label>
+    <div class="col-sm-4"><input type="text" class="form-control" name="inputLastName" placeholder="Last Name"></div>
+    <div class="col-sm-4"><input type="text" class="form-control" name="inputFirstName" placeholder="First Name"></div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">8 Address</label>
+    <div class="col-sm-4"><input type="text" class="form-control" name="inputStreet" placeholder="Street"></div>
+    <div class="col-sm-2"><input type="text" class="form-control" name="inputCity" placeholder="City"></div>
+    <div class="col-sm-1">
+      <select class="form-control" name="inputState" placeholder="City">
+        <option value="ON">ON</option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="inputPostalCode" placeholder="Postal Code">
+    </div>
+    <div class="col-sm-1">
+      <select class="form-control" name="inputCountry" placeholder="Country">
+        <option value="CA">CA</option>
+        <option value="US">US</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">4d Number</label>
+    <div class="col-sm-10"><input type="text" class="form-control" name="inputNumber" placeholder="Driver's License Number"></div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">4a Issue Date</label>
+    <div class="col-sm-3"><input type="text" class="form-control" name="inputIssue" placeholder="Issue Date"></div>
+    <label class="col-sm-2 control-label">4b Expire Date</label>
+    <div class="col-sm-3"><input type="text" class="form-control" name="inputExpire" placeholder="Expire Date"></div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">5 Document Discriminator</label>
+    <div class="col-sm-3"><input type="text" class="form-control" name="inputDD" placeholder="Document Discriminator"></div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">16 Height</label>
+    <div class="col-sm-1"><input type="text" class="form-control" name="inputHeight" placeholder="Height"></div>
+    <div class="col-sm-1">
+      <select class="form-control" name="inputHeightUnit">
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+      </select>
+    </div>
+
+    <label class="col-sm-offset-1 col-sm-2 control-label">15 Sex</label>
+    <div class="col-sm-1">
+      <select class="form-control" name="inputSex">
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">9 Class</label>
+    <div class="col-sm-2"><input type="text" class="form-control" name="inputClass" placeholder="Class"></div>
+    <label class="col-sm-offset-1 col-sm-2 control-label">12 Restrictions</label>
+    <div class="col-sm-2"><input type="text" class="form-control" name="inputRestrictions" placeholder="Restrictions"></div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-5 col-sm-2">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+
+
+  <%= doc %>
+
+</form>

@@ -1,0 +1,71 @@
+var mandatoryElements = [
+  DCA: { type: 'DL', rule: 'V6ANS' },       // Jurisdiction-specific vehicle class
+  DCB: { type: 'DL', rule: 'V12ANS' },      // Jurisdiction-specific restriction codes
+  DCC: { type: 'DL', rule: 'V5ANS' },       // Jursdiction-specific endorsement codes
+  DBA: { type: 'Both', rule: 'F8N' },       // Document Expiration Date: MMDDCCYY for US, CCYYMMDD for Canada
+  DCS: { type: 'Both', rule: 'V40ANS' },    // Customer Family Name
+  DAC: { type: 'Both', rule: 'V40ANS' },    // Customer First Name
+  DAD: { type: 'Both', rule: 'V40ANS' },    // Customer Middle Name(s): multiple names should be separated by ','
+  DBD: { type: 'Both', rule: 'F8N' },       // Document Issue Date: MMDDCCYY for US, CCYYMMDD for Canada
+  DBB: { type: 'Both', rule: 'F8N' },       // Date of Birth: MMDDCCYY for US, CCYYMMDD for Canada
+  DBC: { type: 'Both', rule: 'F1N' },       // Physical Description - Sex: 1 = male, 2 = female
+  DAY: { type: 'Both', rule: 'F3A' },       // Physical Description - Eye Color: ANSI D-20 codes
+  DAU: { type: 'Both', rule: 'F6AN' },      // Physical Description - Height, unit: 'in' or 'cm'
+  DAG: { type: 'Both', rule: 'V35ANS' },    // Address - Street 1
+  DAI: { type: 'Both', rule: 'V20ANS' },    // Address - City
+  DAJ: { type: 'Both', rule: 'F2A' },       // Address - Jurisdiction Code (State)
+  DAK: { type: 'Both', rule: 'F11AN' },     // Address - Postal Code
+  DAQ: { type: 'Both', rule: 'V25ANS' },    // Customer ID Number
+  DCF: { type: 'Both', rule: 'V25ANS' },    // Document Discriminator
+  DCG: { type: 'Both', rule: 'F3A' },       // Country Identification
+  DDE: { type: 'Both', rule: 'F1A' },       // Family name truncation: truncated(T), not been truncated(N), unknown(U)
+  DDF: { type: 'Both', rule: 'F1A' },       // First name truncation: truncated(T), not been truncated(N), unknown(U)
+  DDG: { type: 'Both', rule: 'F1A' },       // Middle name trunction: truncated(T), not been truncated(N), unknown(U)
+
+  order: [
+    'DCA', 'DCB', 'DCC', 'DBA', 'DCS', 'DAC', 'DAD', 'DBD',
+    'DBB', 'DBC', 'DAY', 'DAU', 'DAG', 'DAI', 'DAJ', 'DAK',
+    'DAQ', 'DCF', 'DCG', 'DDE', 'DDF', 'DDG'
+  ]
+];
+
+
+/**
+ * Parse field rule
+ */
+function parseRule(rule) {
+
+  var m = rule.match(/([FV])(\d+)([ANS]+)/);
+  if (m) {
+    return {
+      fixed: (m[1] == 'F'),
+      length: parseInt(m[2]),
+      alpha: (m[3].indexOf('A') != -1),
+      numeric: (m[3].indexOf('N') != -1),
+      special: (m[3].indexOf('S') != -1)
+    };
+  else {
+    // invalid rule
+    return null;
+  }
+}
+
+function pad(str, len) {
+  var p = len - str.length;
+  if (p > 0) str += Array(p).join(' ');
+  return str;
+}
+
+
+exports.getDocument = function(params) {
+  
+  var data = {};
+
+  for (var key in params) {
+    var rule = parseRule(mandatoryElements[key].rule);
+
+    data[key] = rule.fixed ? pad(params[key], rule.length) : params[key];
+
+  }
+
+};
