@@ -4,24 +4,24 @@
 
   <div class="form-group">
     <label class="col-sm-2 control-label">1,2 Name</label>
-    <div class="col-sm-4"><input type="text" class="form-control" name="inputLastName" placeholder="Last Name"></div>
-    <div class="col-sm-4"><input type="text" class="form-control" name="inputFirstName" placeholder="First Name"></div>
+    <div class="col-sm-4"><input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<%= params.lastName ? params.lastName: '' %>"></div>
+    <div class="col-sm-4"><input type="text" class="form-control" name="firstName" placeholder="First Name" value="<%= params.firstName ? params.firstName: '' %>"></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">8 Address</label>
-    <div class="col-sm-4"><input type="text" class="form-control" name="inputStreet" placeholder="Street"></div>
-    <div class="col-sm-2"><input type="text" class="form-control" name="inputCity" placeholder="City"></div>
+    <div class="col-sm-4"><input type="text" class="form-control" name="street" placeholder="Street" value="<%= params.street ? params.street : '' %>"></div>
+    <div class="col-sm-2"><input type="text" class="form-control" name="city" placeholder="City" value="<%= params.city ? params.city : '' %>"></div>
     <div class="col-sm-1">
-      <select class="form-control" name="inputState" placeholder="City">
+      <select class="form-control" name="state" placeholder="City">
         <option value="ON">ON</option>
       </select>
     </div>
     <div class="col-sm-2">
-      <input type="text" class="form-control" name="inputPostalCode" placeholder="Postal Code">
+      <input type="text" class="form-control" name="postalCode" placeholder="Postal Code">
     </div>
     <div class="col-sm-1">
-      <select class="form-control" name="inputCountry" placeholder="Country">
+      <select class="form-control" name="country" placeholder="Country">
         <option value="CA">CA</option>
         <option value="US">US</option>
       </select>
@@ -30,26 +30,26 @@
 
   <div class="form-group">
     <label class="col-sm-2 control-label">4d Number</label>
-    <div class="col-sm-10"><input type="text" class="form-control" name="inputNumber" placeholder="Driver's License Number"></div>
+    <div class="col-sm-10"><input type="text" class="form-control" name="number" placeholder="Driver's License Number" value="<%= params.number ? params.number : '' %>"></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">4a Issue Date</label>
-    <div class="col-sm-3"><input type="text" class="form-control" name="inputIssue" placeholder="Issue Date"></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="issue" placeholder="Issue Date" value="<%= params.issue ? params.issue : '' %>"></div>
     <label class="col-sm-2 control-label">4b Expire Date</label>
-    <div class="col-sm-3"><input type="text" class="form-control" name="inputExpire" placeholder="Expire Date"></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="expire" placeholder="Expire Date" value="<%= params.expire ? params.expire : '' %>"></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">5 Document Discriminator</label>
-    <div class="col-sm-3"><input type="text" class="form-control" name="inputDD" placeholder="Document Discriminator"></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="dd" placeholder="Document Discriminator" value="<%= params.dd ? params.dd : '' %>"></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">16 Height</label>
-    <div class="col-sm-1"><input type="text" class="form-control" name="inputHeight" placeholder="Height"></div>
+    <div class="col-sm-1"><input type="text" class="form-control" name="height" placeholder="Height" value="<%= params.height ? params.height : '' %>"></div>
     <div class="col-sm-1">
-      <select class="form-control" name="inputHeightUnit">
+      <select class="form-control" name="heightUnit">
         <option value="cm">cm</option>
         <option value="in">in</option>
       </select>
@@ -57,7 +57,7 @@
 
     <label class="col-sm-offset-1 col-sm-2 control-label">15 Sex</label>
     <div class="col-sm-1">
-      <select class="form-control" name="inputSex">
+      <select class="form-control" name="sex">
         <option value="1">Male</option>
         <option value="2">Female</option>
       </select>

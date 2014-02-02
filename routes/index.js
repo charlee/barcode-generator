@@ -3,52 +3,46 @@
  * GET home page.
  */
 
-var dl = require('../core/aamva');
+var dl = require('../core/aamva'),
+    __ = require('../lib/underscore-min');
 
 exports.index = function(req, res){
 
   if (req.method == "POST") {
 
-    var lastName    = req.body.inputLastName,
-        firstName   = req.body.inputFirstName,
-        street      = req.body.inputStreet,
-        city        = req.body.inputCity,
-        state       = req.body.inputState,
-        postalCode  = req.body.inputPostalCode,
-        country     = req.body.inputCountry,
-        number      = req.body.inputNumber,
-        issueDate   = req.body.inputIssue,
-        expireDate  = req.body.inputExpire,
-        dd          = req.body.inputDD,
-        height      = req.body.inputHeight,
-        heightUnit  = req.body.inputHeightUnit,
-        sex         = req.body.inputSex,
-        cls         = req.body.inputClass,
-        rest        = req.body.inputRestrictions;
+    var params = __.pick(req.body, 
+      'lastName', 'firstName', 'street', 'city',
+      'state', 'postalCode', 'country', 'number',
+      'issue', 'expire', 'dd', 'height',
+      'heightUnit', 'sex', 'class', 'restrictions'
+    );
 
+    console.log(params);
 
     var doc = dl.getDocument({
-      DCA: cls,
-      DCB: rest,
-      DBA: expireDate,
-      DCS: lastName,
-      DAC: firstName,
-      DBD: issueDate,
-      DBC: sex,
+      DCA: params.cls,
+      DCB: params.rest,
+      DBA: params.expire,
+      DCS: params.lastName,
+      DAC: params.firstName,
+      DBD: params.issue,
+      DBC: params.sex,
       DAY: 'NONE',
-      DAU: height + ' ' + heightUnit,
-      DAG: street,
-      DAI: city,
-      DAJ: state,
-      DAK: postalCode,
-      DAQ: number,
-      DCF: dd,
-      DCG: country
+      DAU: params.height + ' ' + params.heightUnit,
+      DAG: params.street,
+      DAI: params.city,
+      DAJ: params.state,
+      DAK: params.postalCode,
+      DAQ: params.number,
+      DCF: params.dd,
+      DCG: params.country
     });
 
-    res.render('index', { title: 'Driver\'s License', doc: doc });
+    res.render('index', { title: 'Driver\'s License', doc: doc, params: params });
+
   } else {
-    res.render('index', { title: 'Driver\'s License' });
+    // generate form only
+    res.render('index', { title: 'Driver\'s License', doc: '', params: {}  });
   }
 
 
