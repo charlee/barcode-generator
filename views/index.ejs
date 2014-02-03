@@ -18,7 +18,7 @@
       </select>
     </div>
     <div class="col-sm-2">
-      <input type="text" class="form-control" name="postalCode" placeholder="Postal Code">
+      <input type="text" class="form-control" name="postalCode" placeholder="Postal Code" value="<%= params.postalCode ? params.postalCode : '' %>">
     </div>
     <div class="col-sm-1">
       <select class="form-control" name="country" placeholder="Country">
@@ -67,9 +67,9 @@
 
   <div class="form-group">
     <label class="col-sm-2 control-label">9 Class</label>
-    <div class="col-sm-2"><input type="text" class="form-control" name="inputClass" placeholder="Class"></div>
+    <div class="col-sm-2"><input type="text" class="form-control" name="cls" placeholder="Class" value="<%= params.cls ? params.cls : '' %>"></div>
     <label class="col-sm-offset-1 col-sm-2 control-label">12 Restrictions</label>
-    <div class="col-sm-2"><input type="text" class="form-control" name="inputRestrictions" placeholder="Restrictions"></div>
+    <div class="col-sm-2"><input type="text" class="form-control" name="rest" placeholder="Restrictions" value="<%= params.rest ? params.rest : '' %>"></div>
   </div>
 
   <div class="form-group">
@@ -80,5 +80,6 @@
 
 
   <%= doc %>
+  <img src="<%= img %>">
 
 </form>

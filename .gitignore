@@ -8,6 +8,7 @@ lcov.info
 *.pid
 *.swp
 *.gz
+.DS_Store
 
 pids
 logs
@@ -16,3 +17,5 @@ build
 .grunt
 
 node_modules
+public/barcode
+
