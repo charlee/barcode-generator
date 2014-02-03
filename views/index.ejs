@@ -4,8 +4,11 @@
 
   <div class="form-group">
     <label class="col-sm-2 control-label">1,2 Name</label>
-    <div class="col-sm-4"><input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<%= params.lastName ? params.lastName: '' %>"></div>
-    <div class="col-sm-4"><input type="text" class="form-control" name="firstName" placeholder="First Name" value="<%= params.firstName ? params.firstName: '' %>"></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<%= params.lastName ? params.lastName: '' %>"></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="firstName" placeholder="First Name" value="<%= params.firstName ? params.firstName: '' %>"></div>
+
+    <label class="col-sm-2 control-label">3 Date of Birth</label>
+    <div class="col-sm-2"><input type="text" class="form-control" name="dob" placeholder="Date of Birth" value="<%= params.dob ? params.dob: '' %>"></div>
   </div>
 
   <div class="form-group">
@@ -41,8 +44,11 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">5 Document Discriminator</label>
+    <label class="col-sm-2 control-label">5 DD</label>
     <div class="col-sm-3"><input type="text" class="form-control" name="dd" placeholder="Document Discriminator" value="<%= params.dd ? params.dd : '' %>"></div>
+
+    <label class="col-sm-2 control-label">ICN</label>
+    <div class="col-sm-3"><input type="text" class="form-control" name="icn" placeholder="Inventory control number" value="<%= params.icn ? params.icn : '' %>"></div>
   </div>
 
   <div class="form-group">

@@ -85,14 +85,26 @@ var bitmap = {
 };
 
 
-exports.pdf417 = function(text, callback) {
+/**
+ * Generate pdf417 barcode
+ * pdf417(text, [scale], callback(binary))
+ */
+exports.pdf417 = function(text, scale, callback) {
+
+  // deal with optional parameter
+  if (__.isFunction(scale)) {
+    callback = scale;
+    scale = 2;      // default value for scale
+  }
 
   var bw = new BWIPJS;
   bw.bitmap(bitmap);
 
-  bw.scale(2, 2);
+  bw.scale(scale, scale);
 
-  var opts = {};
+  var opts = {
+    eclevel: 5
+  };
 
   bw.push(text);
   bw.push(opts);

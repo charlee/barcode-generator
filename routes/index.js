@@ -15,8 +15,8 @@ exports.index = function(req, res){
     var params = __.pick(req.body, 
       'lastName', 'firstName', 'street', 'city',
       'state', 'postalCode', 'country', 'number',
-      'issue', 'expire', 'dd', 'height',
-      'heightUnit', 'sex', 'cls', 'rest'
+      'issue', 'dob', 'expire', 'dd', 'height',
+      'heightUnit', 'icn', 'sex', 'cls', 'rest'
     );
 
     console.log(params);
@@ -24,10 +24,12 @@ exports.index = function(req, res){
     var doc = dl.getDocument({
       DCA: params.cls,
       DCB: params.rest,
+      DCD: 'NONE',
       DBA: params.expire,
       DCS: params.lastName,
-      DAC: params.firstName,
+      DCT: params.firstName,
       DBD: params.issue,
+      DBB: params.dob,
       DBC: params.sex,
       DAY: 'NONE',
       DAU: params.height + ' ' + params.heightUnit,
@@ -37,10 +39,12 @@ exports.index = function(req, res){
       DAK: params.postalCode,
       DAQ: params.number,
       DCF: params.dd,
-      DCG: params.country
+      DCG: params.country,
+      DCH: 'NONE',
+      DCK: params.icn
     });
 
-    barcode.pdf417(doc, function(s) {
+    barcode.pdf417(doc, 1, function(s) {
       var filename = "barcode-" + Math.random().toString(36).substring(2, 10) + ".png";
       console.log('writing file');
       fs.writeFile('./public/barcode/' + filename, s, 'binary', function(err) {
