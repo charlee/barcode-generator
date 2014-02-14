@@ -15,73 +15,74 @@ load("bwip.js");
 
 BWIPJS.load = load;
 
-var bitmap = {
+var getBitmap = function() {
 
-  colors: [],
-  currentColor: 0,
+  return {
 
-  minX: 999999,
-  minY: 999999,
-  maxX: 0,
-  maxY: 0,
+    colors: [],
+    currentColor: 0,
 
-  data: null,
+    minX: 999999,
+    minY: 999999,
+    maxX: 0,
+    maxY: 0,
 
-  color: function(r, g, b) {
-    var c = { r: r, g: g, b: b };
-    for (var i = 0; i < this.colors.length; i++) {
-      if (__.isEqual(this.colors[i], c)) {
-        this.currentColor = i;
-        break;
+    data: [],
+
+    color: function(r, g, b) {
+      var c = { r: r, g: g, b: b };
+      for (var i = 0; i < this.colors.length; i++) {
+        if (__.isEqual(this.colors[i], c)) {
+          this.currentColor = i;
+          break;
+        }
       }
+
+      this.colors[i] = c;
+      this.currentColor = i;
+    },
+
+    set: function(x, y) {
+      x = Math.floor(x);
+      y = Math.floor(y);
+
+      if (x > this.maxX) this.maxX = x;
+      if (x < this.minX) this.minX = x;
+      if (y > this.maxY) this.maxY = y;
+      if (y < this.minY) this.minY = y;
+
+      if (!this.data[y]) { this.data[y] = []; }
+      this.data[y][x] = this.currentColor;
+    },
+
+    render: function(bgcolor, callback) {
+
+      var w = this.maxX - this.minX + 1,
+          h = this.maxY - this.minY + 1,
+          buffer = new Buffer(w * h * 3);
+
+      for (var y = this.minY; y <= this.maxY; y++) {
+        for (var x = this.minX; x <= this.maxX; x++) {
+          var c = (typeof(this.data[y][x]) == "undefined") ? bgcolor: this.colors[this.data[y][x]],
+          offset = (y * w + x) * 3;
+
+          buffer[offset] = c.r;
+          buffer[offset + 1] = c.g;
+          buffer[offset + 2] = c.b;
+        }
+      }
+
+      var png = new Png(buffer, w, h, 'rgb');
+      
+      png.encode(function(data, err) {
+        if (err) {
+          console.error("Error: " + err.toString());
+        } else {
+          callback(data.toString('binary'));
+        }
+      });
     }
-
-    this.colors[i] = c;
-    this.currentColor = i;
-  },
-
-  set: function(x, y) {
-    x = Math.floor(x);
-    y = Math.floor(y);
-
-    if (x > this.maxX) this.maxX = x;
-    if (x < this.minX) this.minX = x;
-    if (y > this.maxY) this.maxY = y;
-    if (y < this.minY) this.minY = y;
-
-    if (!this.data) { this.data = []; }
-    if (!this.data[y]) { this.data[y] = []; }
-    this.data[y][x] = this.currentColor;
-  },
-
-  render: function(bgcolor, callback) {
-
-    var w = this.maxX - this.minX + 1,
-        h = this.maxY - this.minY + 1,
-        buffer = new Buffer(w * h * 3);
-
-    for (var y = this.minY; y <= this.maxY; y++) {
-      for (var x = this.minX; x <= this.maxX; x++) {
-        var c = (typeof(this.data[y][x]) == "undefined") ? bgcolor: this.colors[this.data[y][x]],
-        offset = (y * w + x) * 3;
-
-        buffer[offset] = c.r;
-        buffer[offset + 1] = c.g;
-        buffer[offset + 2] = c.b;
-      }
-    }
-
-    var png = new Png(buffer, w, h, 'rgb');
-    
-    png.encode(function(data, err) {
-      if (err) {
-        console.error("Error: " + err.toString());
-      } else {
-        callback(data.toString('binary'));
-      }
-    });
-  }
-
+  };
 };
 
 
@@ -98,12 +99,13 @@ exports.pdf417 = function(text, scale, callback) {
   }
 
   var bw = new BWIPJS;
-  bw.bitmap(bitmap);
+  bw.bitmap(getBitmap());
 
   bw.scale(scale, scale);
 
   var opts = {
-    eclevel: 5
+    eclevel: 3,
+    rows: 30
   };
 
   bw.push(text);

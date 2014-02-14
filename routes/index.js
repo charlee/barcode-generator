@@ -19,8 +19,6 @@ exports.index = function(req, res){
       'heightUnit', 'icn', 'sex', 'cls', 'rest'
     );
 
-    console.log(params);
-
     var doc = dl.getDocument({
       DCA: params.cls,
       DCB: params.rest,
@@ -44,9 +42,12 @@ exports.index = function(req, res){
       DCK: params.icn
     });
 
-    barcode.pdf417(doc, 1, function(s) {
+    var type = req.body.type;
+    var scale = (type == 'print') ? 1 : 2;
+      
+
+    barcode.pdf417(doc, scale, function(s) {
       var filename = "barcode-" + Math.random().toString(36).substring(2, 10) + ".png";
-      console.log('writing file');
       fs.writeFile('./public/barcode/' + filename, s, 'binary', function(err) {
         res.render('index', { title: 'Driver\'s License', doc: doc, params: params, img: '/barcode/' + filename });
       });

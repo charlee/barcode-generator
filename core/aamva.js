@@ -97,13 +97,13 @@ function parseRule(rule) {
 
 function rpad(str, len, ch) {
   var p = len - str.length;
-  if (p > 0) str += Array(p).join(ch ? ch : ' ');
+  if (p > 0) str += Array(p + 1).join(ch ? ch : ' ');
   return str;
 }
 
 function lpad(str, len, ch) {
   var p = len - str.length;
-  if (p > 0) str = Array(p).join(ch ? ch : ' ')  + str;
+  if (p > 0) str = Array(p + 1).join(ch ? ch : ' ')  + str;
   return str;
 }
 
